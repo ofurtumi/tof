@@ -73,5 +73,5 @@ ef ég skil fjallið rétt þá ættu hámarksafköst að vera 8000gb/s en það
 ég setti upp linux á vélinni minni í fyrra til að spara mér pening 
 
 ## b)
-![mynd af pwd](imgs/pwd.png)
+![mynd af pwd](imgs/pwd.png)  
 ![mynd af ls -l](imgs/ls.png)
