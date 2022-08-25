@@ -1,5 +1,4 @@
 # heimadæmi 1 - tölvutækni ofl.
----
 
 ## spurning 1
 - af þessum möguleikum nota ég mest í röð fyrst það sem ég nota mest, það sem ég nefndi ekki nota ég ekki
@@ -38,6 +37,8 @@ int 50000*50000 --> -1794967296
 float 1e20 + (-1e20 + 3.14) --> 0.0
 ```
 
+<div class="pb"></div>
+
 ### b)
 kóði:  
 ```java
@@ -67,6 +68,8 @@ double 1e20 + (-1e20 + 3.14) --> 0.0
 
 ### b)
 ef ég skil fjallið rétt þá ættu hámarksafköst að vera 8000gb/s en það hljómar ekki rétt þannig mig grunar að ég skilji fjallið ekki
+
+<div class="pb"></div>
 
 ## spurning 5
 ## a)
