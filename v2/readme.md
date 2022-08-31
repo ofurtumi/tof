@@ -26,6 +26,8 @@ lokagildi bæði `i` og `p` er það sama vegna þess að `i` er frumstillt sem 
 í fyrra dæminu þyrfti `q` að vera mem adressa á integer, veit ekki alveg hvernig, eða yfirhöfuð hvort, það ætti að útfæra það  
 í seinna dæminu þyrftu bæði `q` og `p` að vera af sömu týpu en `q` þyrfti að vísa í minnið, held ég??
 
+<div class='pb'></div>
+
 ## 4.
 hér er forritið, fyrsta útgáfa keyrði for-lykkjuna upp að `k` en það dróg rosalega úr performance svo breytti yfir í $\sqrt{k}$ 
 
@@ -66,6 +68,9 @@ int main(int argc, char *argv[])
     }
 }
 ```
+
+<div class='pb'></div>
+
 output fyrir `n=10`
 ```
 ./twinpr 10  
@@ -82,7 +87,7 @@ output fyrir `n=10`
 ```
 
 ## 5.
-forritið:
+delNode hluti forritsins:
 ```c
 struct Node *delNode(struct Node *head, int k)
 {
@@ -117,6 +122,7 @@ struct Node *delNode(struct Node *head, int k)
 }
 ```
 
+output:  
 ```c
 tof/v2/progs on git main [$x!?] via C v9.4.0-gcc via py v3.8.10 
 x ./lilis
@@ -125,3 +131,6 @@ Listi: 49 -> 92 -> 86 -> 35 -> 93 -> 15 -> 77 -> 86 -> 83
 Listi: 49 -> 92 -> 86 -> 93 -> 15 -> 77 -> 86 -> 83
 Listi: 49 -> 92 -> 86 -> 93 -> 15 -> 77 -> 86 -> 83
 ```
+
+output skjáskot:  
+![skjáskot output](imgs/lilisOutput.png)
