@@ -67,7 +67,7 @@ double 1e20 + (-1e20 + 3.14) --> 0.0
 það að minnisfjallið hafi fjóra stalla gefur til kynna að minnistigveldið geti tekið við fjórum mismunandi stærðum af gögnum
 
 ### b)
-ef ég skil fjallið rétt þá ættu hámarksafköst að vera 8000gb/s en það hljómar ekki rétt þannig mig grunar að ég skilji fjallið ekki
+ef ég skil fjallið rétt þá ef lámarksafköst 500mb/s og hámarksafköstin 14000mb/s eða 28 sinnum meiri en lámarksafköstin
 
 <div class="pb"></div>
 
