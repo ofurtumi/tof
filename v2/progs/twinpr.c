@@ -28,7 +28,10 @@ int isprime(long k)
 
 int main(int argc, char *argv[])
 {
-    int n = argc == 2 ? atoi(argv[1]) : 10;
+    // * argc segir til um fjölda argument-a
+    // ? 1. argument er alltaf nafn á skránni 
+    // * til að koma í veg fyrir seg-fault keyrir þetta bara ef argc > 1
+    int n = argc == 2 ? atoi(argv[1]) : 10; // ! ég fokking elska ternaries
     int cnt = 0;
     int i = 3;
     int a, b;
@@ -39,6 +42,6 @@ int main(int argc, char *argv[])
             printf("%i og %i\n", i, i + 2);
             cnt++;
         }
-        i += 2;
+        i += 2; 
     }
 }

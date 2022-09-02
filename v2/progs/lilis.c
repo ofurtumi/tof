@@ -37,7 +37,9 @@ struct Node *delNode(struct Node *head, int k)
     struct Node *p, *q;
     if (k == 1 && head->next != NULL)
     {
-        head = head->next;
+        p = head->next;
+        free(head);
+        head = p;
         return head;
     };
 
