@@ -14,6 +14,6 @@ double fun(int i) {
 }
 
 int main() {
-    double out = fun(10);
+    double out = fun(2);
     printf("%f", out);
 }
