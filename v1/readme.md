@@ -37,7 +37,7 @@ int 50000*50000 --> -1794967296
 float 1e20 + (-1e20 + 3.14) --> 0.0
 ```
 
-<div class="pb"></div>
+<div style='page-break-after: always;'></div>
 
 ### b)
 kóði:  
@@ -69,7 +69,7 @@ double 1e20 + (-1e20 + 3.14) --> 0.0
 ### b)
 ef ég skil fjallið rétt þá ef lámarksafköst 500mb/s og hámarksafköstin 14000mb/s eða 28 sinnum meiri en lámarksafköstin
 
-<div class="pb"></div>
+<div style='page-break-after: always;'></div>
 
 ## spurning 5
 ## a)

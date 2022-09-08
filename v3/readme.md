@@ -1,3 +1,9 @@
+---
+pdf_options:
+  format: a4
+  margin: 10mm 20mm
+---
+
 # heimadæmi 3 - tölvutækni og forritun
 
 ## 1.
@@ -30,6 +36,8 @@ x: 10, p: 0x7ffc4a12c4c0, q: 0x7ffc4a12c4c4
 p == q: 0, *p == *q: 1
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## 2.
 skemmtilegt dæmi, set fyrst kóðabútinn og svo 3 keyrslur þar af tvær með sömu parametrum  
 
@@ -50,20 +58,22 @@ int main(int argc, char *argv[])
     }
 
     int *a = (int *)calloc(n, sizeof(int));
+    
     for (int i = 0; i < k * n; i++)
     {
         int r = rand() % n;
         a[r]++;
     }
-
+    
     int cnt = 0;
+    
     for (int i = 0; i < n; i++)
     {
         if (a[i] == 0)
             cnt++;
     }
+    
     free(a);
-
     printf("Eftir %i ítranir eru %i hólf ennþá 0, eða %.1f%%",
            (int)k * n, cnt, ((double)cnt / (double)n) * 100);
 }
@@ -72,6 +82,7 @@ int main(int argc, char *argv[])
 keyrslur:  
 ![keyrslur dæmi 2](imgs/keyrslur2.png)
 
+<div style='page-break-after: always;'></div>
 
 ## 3. 
 forrit:  
@@ -121,3 +132,34 @@ void delNode(struct dNode **h, struct dNode **t, int k)
 
 keyrsla:  
 ![keyrsla á dllist.c](./imgs/keyrslur3.png)
+
+<div style='page-break-after: always;'></div>
+
+## 4. 
+forrit:  
+```c
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LEN 200
+int main(int argc, char **argv)
+{
+    char innstr[MAX_LEN];
+    while (scanf("%s", innstr) != EOF)
+    {
+        if (strchr(innstr, 120) != NULL) {
+            for (int i = 0; i < strlen(innstr); i++)
+            {
+                printf("x");
+            }
+        } else {
+            printf("%s", innstr);
+        } 
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+keyrsla:  
+![keyrsla á xsia.c](imgs/keyrslur4.png)
