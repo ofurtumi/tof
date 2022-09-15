@@ -13,7 +13,7 @@ x = y == 2 ? y << 1 : y >> 1;   // x: 1
 ```c
 short sx = -2;      //    101
 int x = -14;        // 110001
-unsigned ux = sx;   // 111101 
+unsigned ux = sx;   // 111110
 ```
 
 | Reiknisegð | Tugatala | Tvíundartala |
@@ -22,7 +22,7 @@ unsigned ux = sx;   // 111101
 |x - (sx << 1)|-10|110110|
 |x >> 3|-2|111110|
 |(x+ux) < 0|0|000000|
-|ux + sx|59|111011|
+|ux + sx|60|111110|
 
 ## 3.
 ```c
