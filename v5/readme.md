@@ -84,5 +84,35 @@ byrjum á að athuga hvaða veldi af tveimur næst 12 án þess að fara yfir, �
 í tilfelli 7-3 fleytitölunar er bíasinn `3` þannig við beitum sömu aðferð og með 7-4 fleytitöluna og fáum út að brotið þarf að vera $3 + 3 = 6$ eða `110`  
 notum nú upplýsingarnar úr 7-4 og vitum að það þarf bara að hafa fyrsta bitann í brotbitastrengunum og látum hann vera `100`, gerum síðan formerkisbitann að `1` og endum með `1110100` sem er `-12.0`
 
-## 4.
+<div style='page-break-after: always;'></div>
 
+## 4.
+### a)
+þegar maður er með `4` bita í veldisbitastrengnum er hægt að tákna allar heiltölur á bilinu frá og með 1-16 sjá töflu:  
+|binary|decimal|binary|decimal|
+|:---:|:---:|:---:|:---:|
+|00111000|1|01010001|9|
+|01000000|2|01010010|10|
+|01000100|3|01010011|11|
+|01001000|4|01010100|12|
+|01001010|5|01010101|13|
+|01001100|6|01010110|14|
+|01001110|7|01010111|15|
+|01010000|8|01011000|16|
+
+en núna ef við myndum halda áfram mynstrinu og bæta einum við með því að hækka brotabitastrenginn um einn þá fáum við `18` en ekki `17` eins og við myndum búast við  
+þetta er vegna þess að síðasti bitastrengurinn myndi margfaldast með `2^1` sem er `2` og því of mikið til að ná upp í `17`
+
+### b)
+það er ekki hægt að lenda nákvæmlega á `-0.2` en með rúnnun að næsta tíundahluta í átt að `0` er hægt að segja að næsta talan `10100101` sé allavega næstum því `-0.2`
+
+### c)
+talan hafði ekki gildið `-0.2` heldur var hún `-0.203125`  
+bitastrengurinn er `10100101` og reiknuð út í tugatölu er $-1(2^-3+2^-4+2^-6) = -0.203125$
+
+## 5.
+okidi, leiðum þetta út, fyrir hvert staðlað gildi á veldisbitastrengnum er hægt að fá $(2^3)*2=16$ mismunandi gildi á tölunni, nú vitum við að ef gildið á veldisbitastrengum er `111` þá er talan annaðhvort `NaN`, `infinity` eða `-infinity`  
+þá er hægt að sjá að fyrir hvert gildi á veldisstrengum, fyrir utan `111`, er hægt að fá 16 mismunandi gildi á tölunni  
+heildarfjöldi gilda sem hægt er að fá með tölunni er þá:  
+$(16*8-1)+3 = 115$ þar sem `-1` er vegna `111` í veldisstrengum og `+3` er fyrir gildin `NaN`, `inf` og `-inf`  
+svarið er `115`
