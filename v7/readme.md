@@ -163,7 +163,7 @@ fact:
 sjá svo línu 7 þar gildið sem geymt var á hlaðanum sem `%rbx` er margfaldað með útkomunni úr síðasta fallakalli og síðan poppað því við þurfum ekki að passa upp á það lengur því svo er því skilað
 
 ### b)
-assembly dump með -O2:
+**assembly dump með -O2:**
 ```asm
 .LFB0:
         movl    $1, %eax
