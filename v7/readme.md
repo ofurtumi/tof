@@ -134,7 +134,7 @@ addl    %ebx, %eax
 <div style="page-break-after:always;"></div>
 
 ### b)
-![mynd af stackframe](nobg-stackframe.png)
+![mynd af stackframe](stackframe.png)
 
 <div style="page-break-after:always;"></div>
 
