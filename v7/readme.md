@@ -32,9 +32,11 @@ long hoho(long x) {
 }
 ```
 
+<div style="page-break-after:always;"></div>
+
 ## 2.
 
-assembly:  
+**assembly:**
 ```asm
 whi:
     movl    $0, %eax        # núllstilla eax
@@ -48,7 +50,7 @@ whi:
     jne     .L3             # stekkur ef %rdi er ekki núll
 ```
 
-c:  
+**c:**  
 ```c
 long whi(long k)
 {
@@ -62,8 +64,9 @@ long whi(long k)
 }
 ```
 
-## 3.
 
+
+## 3.
 ### a)
 **assembly:**  
 ```asm
@@ -75,7 +78,7 @@ func:
     leal    $3(%rdi), %edx      # leggur 3 við %rdi og setur í %edx
     testl   %edi, %edi          # athugar hvort %edi =< 0 og setur viðeigandi flögg
     cmovns  %edi, %edx          # færir %edi inn í %edx ef %edi >= 0
-    sarl    $2, %edx            # notear heiltöludeilingu %edx = %edx / 4 
+    sarl    $2, %edx            # notar heiltöludeilingu %edx = %edx / 4 
     movl    %edx, %edi          # færir %edx í %edi
     call    func                # recursion call á func
     addl    %ebx, %eax          # lagt saman %ebx og %eax
@@ -86,6 +89,8 @@ func:
     ret                         # skila %eax
 ```
 
+<div style="page-break-after:always"></div>
+
 **c:**  
 ```c
 int func(int n)
@@ -95,41 +100,92 @@ int func(int n)
     return (n * 3) + func(n / 4);
 }
 ```
+**c kóðinn línu fyrir línu tengdur í assembly**
+> `if (n <= 1)`, setur flöggin fyrir n og hoppar ef less or equal
+```asm
+cmpl     $1, %edi
+jle      .L3
+```
+
+> `return 1`, skilar ás ef n uppfyllir skilirði í efri línunni
+```asm
+movl    $1, %eax
+ret
+```  
+
+> `return (n * 3) + func(n / 4)`, brjótum meira niður  
+> `(n * 3)`, margfaldar n með 3, notar leal
+```asm
+leal    (%rdi, %rdi, 2), %ebx
+```  
+
+> `func(n / 4)`, köllum func með gildinu n/4,
+```asm
+sarl    $2, %edx
+movl    %edx, %edi
+call    func
+```
+
+> `(n * 3) + func(n / 4)`
+```asm
+addl    %ebx, %eax
+```
+
+<div style="page-break-after:always;"></div>
 
 ### b)
+![mynd af stackframe](nobg-stackframe.png)
 
+<div style="page-break-after:always;"></div>
 
 ## 4.
+> ath: í báðum þessum dumpum er ég búinn að fjarlægja línur sem eru ekki nauðsynlegar fyrir verkefnið, td. `.cfi_startproc` og `endbr64`
+
 ### a)
-assembly dump:  
+**assembly dump:**  
 ```asm
 fact:
 .LFB0:
-	.cfi_startproc
-	endbr64
 	cmpq	$1, %rdi
 	jg		.L8
 	movl	$1, %eax
 	ret
 .L8:
 	pushq	%rbx
-	.cfi_def_cfa_offset 16
-	.cfi_offset 3, -16
 	movq	%rdi, %rbx
 	leaq	-1(%rdi), %rdi
 	call	fact
 	imulq	%rbx, %rax
 	popq	%rbx
-	.cfi_def_cfa_offset 8
 	ret
-	.cfi_endproc
 ```
 ástæðuna fyrir því að það þarf að nota `pushq` og `popq` í þessum endurkvæmnu dæmum er hægt að sjá í línu 4 inn í `.L8` þar sem verið er að færa `%rdi` inn í `%rbx%` til að gildið týnist ekki á meðan verið er að vinna sig áfram með endurkvæmnina  
 sjá svo línu 7 þar gildið sem geymt var á hlaðanum sem `%rbx` er margfaldað með útkomunni úr síðasta fallakalli og síðan poppað því við þurfum ekki að passa upp á það lengur því svo er því skilað
 
+### b)
+assembly dump með -O2:
+```asm
+.LFB0:
+        movl    $1, %eax
+        cmpq    $1, %rdi
+        jle     .L1
+.L2:
+        movq    %rdi, %rdx
+        subq    $1, %rdi
+        imulq   %rdx, %rax
+        cmpq    $1, %rdi
+        jne     .L2
+.L1:
+        ret
+```
+fyrsta sem ég sé hér er að `-O2` sleppir því að hafa tvö return og notar bara eitt inn í `.L1` sem case enda í  
+annað sem er greinilegur munur er að `-O2` notar ekki `call` heldur fer með endurkvæmnina eins og það sé lykkja þar sem síðasta línan athugar hvort `%rdi` sé orðið minna eða jafnt og einn, ef svo detta inn í `.L1` og returna
+
+<div style="page-break-after:always"></div>
+
 ## 5.
 
-hér er c kóði sem gerir það sem assembly kóðinn ætti að gera:
+hér er c kóði sem gerir það sama og gefni assembly kóðinn:  
 ```c
 int func(int n) {
     int out;
