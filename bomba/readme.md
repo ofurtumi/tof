@@ -206,13 +206,16 @@ hinsvegar ef talan er lægri eða jöfn og 5 þá heldur forritið áfram og ath
 
 |n|case|calc address|`%eax`|
 |:---:|---:|---:|---:|
-|0| <+86>| <+86>|882-452+295-916+218-927=-900|
-|1|<+169>| <+91>|-452+295-916+218-927=-1782|
-|2|<+171>| <+96>|295-916+218-927=-1330|
-|3|<+178>|<+191>|-916+218-927=-1625|
-|4|<+185>|<+106>|218-927=709|
-|5|<+192>|<+111>|-927=-927|
-|6|<+199>|<+116>|927-927=0|
-|7|<+206>|<+121>|-927=-927|
+|0| <+86>| <+86>|882 - 452 + 295 - 916 + 218 - 927= -900|
+|1|<+169>| <+91>|-452 + 295 - 916 + 218 - 927 = -1782|
+|2|<+171>| <+96>|295 - 916 + 218 - 927 = -1330|
+|3|<+178>|<+191>|-916 + 218 - 927 = -1625|
+|4|<+185>|<+106>|218 - 927 = -709|
+|5|<+192>|<+111>|-927 = -927|
+|6|<+199>|<+116>|927 - 927 = 0|
+|7|<+206>|<+121>|-927 = -927|
 
-> ath. síðustu tvö case, 6 og 7, skipta ekki máli þar sem tékkað er hvort fyrra stakið í inntakinu sé stærra en 5 og ef svo hoppar beint í sprengju
+keyri svo með öllum gildunum hér til að athuga hvort virkar, nota gildin sem ég veit að eru rétt inn í keys.txt  
+> ath. síðustu tvö case, 6 og 7, skipta ekki máli þar sem tékkað er hvort fyrra stakið í inntakinu sé stærra en 5 og ef svo hoppar beint í sprengju  
+
+![phase\_3](./pics/phase_3.png)
