@@ -7,20 +7,21 @@ byrjaði á því að skoða hvað væri í gangi í fyrstu skipununni, `sub $0x
 notum núna **gdb** til þess að sjá hvað er í `%rsi`, þá má sjá streng:  
 `"I demand the sum of... ONE MILLION DOLLARS."`  
 sem í fljótu bragði lítur ekki út fyrir að vera assembly skipun, þannig við reiknum með því að það sé lykilorðið  
-keyrum forritið aftur og notum strenginn sem inntak og ... *phase_1* aftengt
+keyrum forritið aftur og notum strenginn sem inntak og ... *phase_1* aftengt  
+![phase_1](pics/phase_1.png)
 
 ## phase_2
 
 ```asm
 phase_2
-    0x000000000000162b <+0>:	endbr64 
-    0x000000000000162f <+4>:	push   %rbp
-    0x0000000000001630 <+5>:	push   %rbx
-    0x0000000000001631 <+6>:	sub    $0x28,%rsp
-    0x0000000000001635 <+10>:	mov    %fs:0x28,%rax
-    0x000000000000163e <+19>:	mov    %rax,0x18(%rsp)
-    0x0000000000001643 <+24>:	xor    %eax,%eax
-    0x0000000000001645 <+26>:	mov    %rsp,%rsi
+    0x000000000000162b <+0>:  endbr64 
+    0x000000000000162f <+4>:  push   %rbp
+    0x0000000000001630 <+5>:  push   %rbx
+    0x0000000000001631 <+6>:  sub    $0x28,%rsp
+    0x0000000000001635 <+10>: mov    %fs:0x28,%rax
+    0x000000000000163e <+19>: mov    %rax,0x18(%rsp)
+    0x0000000000001643 <+24>: xor    %eax,%eax
+    0x0000000000001645 <+26>: mov    %rsp,%rsi
 ```
 í fyrstu línum *phase_2* er verið að búa til stackframe og frumstilla slatta af breytum veit ekki alveg, spáði ekki allt of mikið í það  
 skoðum fallið í heild sinni, þá sjáum við strax fallið `<read_six_numbers>`  
@@ -32,42 +33,43 @@ skoðum fallið í heild sinni, þá sjáum við strax fallið `<read_six_number
 hmmm ehv í gangi hérna kíkjum inn í þetta fall
 
 ```asm
-    000555555555c45 <+4>:	sub    $0x8,%rsp    
+    0x0000000000001c41 <+0>:  endbr64 
+    0x0000000000001c45 <+4>:  sub    $0x8,%rsp    
     # pláss tekið frá, búinn til stackframe?
 
-    0x0000555555555c49 <+8>:	mov    %rsi,%rdx
+    0x0000555555555c49 <+8>:  mov    %rsi,%rdx
     # fært gildið í %rsi, inntakið, inn í %rdx
 
-    0x0000555555555c4c <+11>:	lea    0x4(%rsi),%rcx
+    0x0000555555555c4c <+11>: lea    0x4(%rsi),%rcx
     # sett %rsi[1] inn í %rcx
 
-    0x0000555555555c50 <+15>:	lea    0x14(%rsi),%rax
-    0x0000555555555c54 <+19>:	push   %rax
+    0x0000555555555c50 <+15>: lea    0x14(%rsi),%rax
+    0x0000555555555c54 <+19>: push   %rax
     # sett %rsi[5] inn í %rax og %rax svo ýtt á hlaðann
 
-    0x0000555555555c55 <+20>:	lea    0x10(%rsi),%rax
-    0x0000555555555c59 <+24>:	push   %rax
+    0x0000555555555c55 <+20>: lea    0x10(%rsi),%rax
+    0x0000555555555c59 <+24>: push   %rax
     # sama hér og í <+15> nema núna %rsi[4] og %rax aftur ýtt
 
-    0x0000555555555c5a <+25>:	lea    0xc(%rsi),%r9
-    0x0000555555555c5e <+29>:	lea    0x8(%rsi),%r8
+    0x0000555555555c5a <+25>: lea    0xc(%rsi),%r9
+    0x0000555555555c5e <+29>: lea    0x8(%rsi),%r8
     # sama gamla sagan skellum %rsi[3] inn í %r9 og %rsi[2] inn í %r8
     
-    0x0000555555555c62 <+33>:	lea    0x16ba(%rip),%rsi        # 0x555555557323
+    0x0000555555555c62 <+33>: lea    0x16ba(%rip),%rsi        # 0x555555557323
     # hérna er verið að krydda almennilega, %rip hliðrað um 0x16ba og sett í %rsi
     # ef við tékkum á gildi %rsi hér í gdb má sjá að þetta er strengurinn "%d %d %d %d %d %d"
     # nú höfum við formið á inntakinu 
     
-    0x0000555555555c69 <+40>:	mov    $0x0,%eax
-    0x0000555555555c6e <+45>:	call   0x555555555320 <__isoc99_sscanf@plt>
-    0x0000555555555c73 <+50>:	add    $0x10,%rsp
-    0x0000555555555c77 <+54>:	cmp    $0x5,%eax
-    0x0000555555555c7a <+57>:	jle    0x555555555c81 <read_six_numbers+64>
-    0x0000555555555c7c <+59>:	add    $0x8,%rsp
-    0x0000555555555c80 <+63>:	ret
+    0x0000555555555c69 <+40>: mov    $0x0,%eax
+    0x0000555555555c6e <+45>: call   0x555555555320 <__isoc99_sscanf@plt>
+    0x0000555555555c73 <+50>: add    $0x10,%rsp
+    0x0000555555555c77 <+54>: cmp    $0x5,%eax
+    0x0000555555555c7a <+57>: jle    0x555555555c81 <read_six_numbers+64>
+    0x0000555555555c7c <+59>: add    $0x8,%rsp
+    0x0000555555555c80 <+63>: ret
     # restin af kóðanum er svo til að athuga hvort að inntakið uppfylli rétt skilyrði
 
-    0x0000555555555c81 <+64>:	call   0x555555555c15 <explode_bomb>
+    0x0000555555555c81 <+64>: call   0x555555555c15 <explode_bomb>
     # og svo auðvitað sprengja hér bara til öryggis :)
 ```
 mikið í gangi í þessu falli en það sem við höfum sérstakan áhuga á `cmp` fallinu og hvað er í gistunum þar  
@@ -147,4 +149,5 @@ setjum núna upp töflu sem sýnir hver þessi gildi þurfa að vera á hverju s
 |5      |25     |10     |25+10+1=36 |false  |
 |6      |36     |12     |36+12+1=49 |true   |
 
-þá er lykilorðið bara komið, `1 4 9 16 25 36 49` og í þessum skrifuðu orðum sé ég að mynstrið er `a[i] = (i+1)^2`, rosalega sem hægt er að flækja einfaldan kóða og ég hefði átt að sjá þetta fyrr
+þá er lykilorðið bara komið, `1 4 9 16 25 36 49` og í þessum skrifuðu orðum sé ég að mynstrið er `a[i] = (i+1)^2`, rosalega sem hægt er að flækja einfaldan kóða og ég hefði átt að sjá þetta fyrr  
+![phase_2](pics/phase_2.png)
