@@ -32,6 +32,8 @@ skoðum fallið í heild sinni, þá sjáum við strax fallið `<read_six_number
 ```
 hmmm ehv í gangi hérna kíkjum inn í þetta fall
 
+<div style="page-break-after: always;"></div>
+
 ```asm
     0x0000000000001c41 <+0>:  endbr64 
     0x0000000000001c45 <+4>:  sub    $0x8,%rsp    
@@ -57,7 +59,7 @@ hmmm ehv í gangi hérna kíkjum inn í þetta fall
     
     0x0000555555555c62 <+33>: lea    0x16ba(%rip),%rsi        # 0x555555557323
     # hérna er verið að krydda almennilega, %rip hliðrað um 0x16ba og sett í %rsi
-    # ef við tékkum á gildi %rsi hér í gdb má sjá að þetta er strengurinn "%d %d %d %d %d %d"
+    # skoðum %rsi hér í gdb og þá má sjá að þetta er strengurinn "%d %d %d %d %d %d"
     # nú höfum við formið á inntakinu 
     
     0x0000555555555c69 <+40>: mov    $0x0,%eax
@@ -67,7 +69,7 @@ hmmm ehv í gangi hérna kíkjum inn í þetta fall
     0x0000555555555c7a <+57>: jle    0x555555555c81 <read_six_numbers+64>
     0x0000555555555c7c <+59>: add    $0x8,%rsp
     0x0000555555555c80 <+63>: ret
-    # restin af kóðanum er svo til að athuga hvort að inntakið uppfylli rétt skilyrði
+    # restin er svo til að athuga hvort að inntakið uppfylli rétt skilyrði
 
     0x0000555555555c81 <+64>: call   0x555555555c15 <explode_bomb>
     # og svo auðvitað sprengja hér bara til öryggis :)
@@ -78,6 +80,7 @@ notum `si` í **gdb** til að fara í línu `+33` og kíkjum á minnisaddressuna
 > nú vitum við að inntakið á að vera 6 tölur skildar að með bili  
 > byrjum upp á nýtt og segjum við notum tölurnar 1 2 3 4 5 6
 
+<div style="page-break-after: always;"></div>
 
 ```asm
     0x000000000000164d <+34>: cmpl   $0x1,(%rsp)                  
@@ -99,7 +102,8 @@ notum `si` í **gdb** til að fara í línu `+33` og kíkjum á minnisaddressuna
     # boom
 ```
 ok núna sjáum við að það er búið að frumstilla eina breytu, `%ebx = 2`, og verið að hoppa til `0x1670` þannig við kíkjum þangað næst, línu fyrir línu
-> **ath. að þessi lýsing miðar við fyrstu ýtrun, hinar koma seinna**
+
+<div style="page-break-after: always;"></div>
 
 ```asm
     0x0000000000001670 <+69>: mov    %ebx,%eax                
@@ -108,7 +112,7 @@ ok núna sjáum við að það er búið að frumstilla eina breytu, `%ebx = 2`,
     0x0000000000001672 <+71>: add    0x0(%rbp),%eax           
     # svo bætum við fyrsta gildi í %rbp við %eax
 
-    0x0000000000001675 <+74>:	add    $0x1,%eax                
+    0x0000000000001675 <+74>: add    $0x1,%eax                
     # bætum svo einum ofan á það
 
     0x0000000000001678 <+77>: cmp    %eax,0x4(%rbp)           
@@ -138,6 +142,9 @@ ok núna sjáum við að það er búið að frumstilla eina breytu, `%ebx = 2`,
 nú erum við búin að finna bæði formúlu sem reiknar tölu sem inntak á að fylgja og hvenær sú formúla á að hætta  
 við vitum að fyrsta stak á að vera `1` vegna línunar `cmpl   $0x1,(%rsp)` sem er fyrsta compare í fallinu, notum svo formúluna sem við fundum og athugum hvað uppfyllir `%rbp[1] == %eax + %rbp[0] + 1`  
 við *"notuðum"* `1 2 3 4 5 6` sem inntak í fyrstu tilraun en sjáum að það gengur ekki, því ef `%rbp[0] = 1` og `%eax = 2` þá verður `%rbp[1] == 4`  
+
+<div style="page-break-after: always;"></div>
+
 setjum núna upp töflu sem sýnir hver þessi gildi þurfa að vera á hverju stigi
 
 | # | `%rbp[0]` | `%eax` | `%rbp[1]` | `%eax == 12` |
@@ -201,7 +208,10 @@ reikniaðgerðirnar hér eru ekki flóknar
 
 næsta skipun eftir reikniaðgerðirnar er til að athuga hvort `%rsp` sé hærri en `5` og ef svo er hoppa í sprengiskipun  
 hinsvegar ef talan er lægri eða jöfn og 5 þá heldur forritið áfram og athugar hvort annað gildið í `%rsp` sé jafnt og `%eax` sem samkvæmt útreikningunum áðan er `-709`  
-þá erum við komin með báðar tölurnar, `4 -709`
+þá erum við komin með báðar tölurnar, `4 -709`  
+
+<div style="page-break-after: always;"></div>
+
 > ath. `-709` reiknar með að við notum `4` sem fyrri tölu, vegna þess að þetta er switch þá getur `%eax` haft önnur gildi útfrá fyrstu tölu, setjum upp töflu :)  
 
 |n|case|calc address|`%eax`|

@@ -710,14 +710,14 @@ Disassembly of section .text:
     17dd:	31 c0                	xor    %eax,%eax
     17df:	48 8d 4c 24 04       	lea    0x4(%rsp),%rcx
     17e4:	48 89 e2             	mov    %rsp,%rdx
-    17e7:	48 8d 35 41 1b 00 00 	lea    0x1b41(%rip),%rsi        # 332f <array.0+0x14f>
+    17e7:	48 8d 35 41 1b 00 00 	lea    0x1b41(%rip),%rsi        # "%d %d"
     17ee:	e8 2d fb ff ff       	call   1320 <__isoc99_sscanf@plt>
     17f3:	83 f8 02             	cmp    $0x2,%eax
     17f6:	75 06                	jne    17fe <phase_4+0x37>
-    17f8:	83 3c 24 0e          	cmpl   $0xe,(%rsp)
-    17fc:	76 05                	jbe    1803 <phase_4+0x3c>
+    17f8:	83 3c 24 0e          	cmpl   $0xe,(%rsp)		# stökkva ef 14 eða lægra
+    17fc:	76 05                	jbe    1803 <phase_4+0x3c>	# stökkva ef 14 eða lægra
     17fe:	e8 12 04 00 00       	call   1c15 <explode_bomb>
-    1803:	ba 0e 00 00 00       	mov    $0xe,%edx
+    1803:	ba 0e 00 00 00       	mov    $0xe,%edx		# edx 
     1808:	be 00 00 00 00       	mov    $0x0,%esi
     180d:	8b 3c 24             	mov    (%rsp),%edi
     1810:	e8 71 ff ff ff       	call   1786 <func4>
