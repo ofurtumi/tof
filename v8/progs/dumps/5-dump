@@ -1,0 +1,47 @@
+	.file	"5.c"
+	.text
+	.globl	sum10
+	.type	sum10, @function
+sum10:
+.LFB0:
+	.cfi_startproc
+	endbr64
+	leaq	280(%rdi), %rcx
+	movq	8(%rdi), %rax
+	addq	(%rdi), %rax
+	addq	16(%rdi), %rax
+	leaq	24(%rdi), %rdx
+.L2:
+	addq	(%rdx), %rax
+	addq	8(%rdx), %rax
+	addq	16(%rdx), %rax
+	addq	24(%rdx), %rax
+	addq	32(%rdx), %rax
+	addq	40(%rdx), %rax
+	addq	48(%rdx), %rax
+	addq	56(%rdx), %rax
+	addq	$64, %rdx
+	cmpq	%rcx, %rdx
+	jne	.L2
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	sum10, .-sum10
+	.ident	"GCC: (Ubuntu 11.2.0-19ubuntu1) 11.2.0"
+	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 8
+	.long	1f - 0f
+	.long	4f - 1f
+	.long	5
+0:
+	.string	"GNU"
+1:
+	.align 8
+	.long	0xc0000002
+	.long	3f - 2f
+2:
+	.long	0x3
+3:
+	.align 8
+4:

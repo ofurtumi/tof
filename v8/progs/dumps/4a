@@ -1,0 +1,43 @@
+	.file	"4a.c"
+	.text
+	.globl	sumv
+	.type	sumv, @function
+sumv:
+.LFB0:
+	.cfi_startproc
+	endbr64
+	movq	$0, (%rdx)
+	testl	%esi, %esi
+	jle	.L1
+	movq	%rdi, %rax
+	leal	-1(%rsi), %ecx
+	leaq	8(%rdi,%rcx,8), %rsi
+.L3:
+	movq	(%rax), %rcx
+	addq	%rcx, (%rdx)
+	addq	$8, %rax
+	cmpq	%rsi, %rax
+	jne	.L3
+.L1:
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	sumv, .-sumv
+	.ident	"GCC: (Ubuntu 11.2.0-19ubuntu1) 11.2.0"
+	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 8
+	.long	1f - 0f
+	.long	4f - 1f
+	.long	5
+0:
+	.string	"GNU"
+1:
+	.align 8
+	.long	0xc0000002
+	.long	3f - 2f
+2:
+	.long	0x3
+3:
+	.align 8
+4:
