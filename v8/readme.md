@@ -1,3 +1,8 @@
+<!-- ---
+pdf_options:
+  format: a4
+  margin: 10mm 20mm
+--- -->
 # heimadæmi 8 - tölvutækni og forritun
 þorvaldur tumi baldursson
 ---
@@ -27,7 +32,7 @@ lögum þetta með því að:
 -  víkka `eink` um `4` bæti
 -  víkka `postnr` um `5` bæti
 
-nú má sjá á mydinni að skiptingin uppfyllir `K=8`
+nú má sjá á myndinni að skiptingin uppfyllir `K=8`
 ![skipting a2](imgs/skipting2.excalidraw.png)
 
 
@@ -66,14 +71,21 @@ afrit:
 ### a)
 ég veit ekki alveg hvort assembly útleiðingin mín er rétt en ég er nokkuð viss um að `M=7` og `N=11`  
 þessar tölur, eins og ég nefni fyrir ofan, eru offset fyrir lengd innri fylkja fylkjanna í vísunum fyrir stök sjá mynd,
-þar erum við með tvívítt fylki með lengdir `2,3` nú sjáum við að ef við notum formúluna `*arr + 8\*(3\*i+j)` til að finna stak `arr[i][j]` gengur það upp  
-segjum að við viljum finna `arr[1][2]` setjum þá tölurnar inn í formúluna og fáum `\*arr + 8\*(3\*1+2)` sem er jafn og `*arr + 40` sem gefur stakið `6` sem er rétt  
+þar erum við með tvívítt fylki með lengdir `2,3` nú sjáum við að ef við notum formúluna `*arr + 8*(3*i+j)` til að finna stak `arr[i][j]` gengur það upp. 
+segjum að við viljum finna `arr[1][2]` setjum þá tölurnar inn í formúluna og fáum `*arr + 8*(3*1+2)` sem er jafnt og `*arr + 40` sem gefur stakið `6` sem er rétt  
 ![mynd](imgs/2a.excalidraw.png)
 
 ### b)
 ef bæði fylkin hefðu verið skilgreind sem `MxN` þá hefði ekki þurft að reikna staðsetningar innan annarshvors fylkisins sérstaklega og þá hefði ekki verið hægt að finna `N` en það hefði verið hægt að finna `M` á sama hátt og fyrir ofan
 
 ## 3.
+skoðum fyrst assembly dumpið í heild sinni, ef við leitum að kanarífuglinum getum við fljótt séð að hann er að finna í línu 8 í `echo` fallinu sjá  
+```asm
+	movq	%fs:40, %rax
+	movq	%rax, 8(%rsp)
+  xorl	%eax, %eax
+```
+eftir nokkrar keyrslur sýnist mér gildið á kanarínum vera það samax
 
 ## 4. 
 ### a)
@@ -97,10 +109,10 @@ sumv:
   .L1:
     ret
 ```
-hér eru tveir minnisaðgangar eins og hægt væri að sjá útfrá c kóðanum, `\*s` og `a[i]`
+hér eru tveir minnisaðgangar eins og hægt væri að sjá útfrá c kóðanum, `\s` og `a[i]`
 
 ### b)  
-einfaldasta leiðin til að minnka minnisaðganga er einfaldlega að hafa bara einn minnisaðgang inn í `\*s` eftir að allt í `a` hefur verið lagt saman, sjá:  
+einfaldasta leiðin til að minnka minnisaðganga er einfaldlega að hafa bara einn minnisaðgang inn í `*s` eftir að allt í `a` hefur verið lagt saman, sjá:  
 
 ```c
 void sumvBetter(long *a, int len, long *s) {
@@ -118,7 +130,7 @@ void sumvBetter(long *a, int len, long *s) {
 smalamálskóðinn sem kemur út tekur lykkjuna og breytir henni í röð af skipunum í stað þess að vera lykkja, það er bara kallað á `addq` með viðeigandi hliðrun á vistfang `a` 10 sinnum
 
 ### b)
-núna beitir þýðandinn aftur mjög svipuðum aðferðum með breytingunni að setja allt heila klabbið inn í lykkju sem er kallað á tvisvar, þ.e. leggur fyrstur 10 stökin saman inn með 10 aðgerðum í fyrstu ýtrun og síðan er hliðrað stakinu sem notað er til að hliðra bendi á vistfang fylkisins um `8\*20` bæti og lykkjan keyrð aftur
+núna beitir þýðandinn aftur mjög svipuðum aðferðum með breytingunni að setja allt heila klabbið inn í lykkju sem er kallað á tvisvar, þ.e. leggur fyrstur 10 stökin saman inn með 10 aðgerðum í fyrstu ýtrun og síðan er hliðrað stakinu sem notað er til að hliðra bendi á vistfang fylkisins um `8*20` bæti og lykkjan keyrð aftur
 
 ### c)
 hérna er fyrst, utan nokkurar lykkju, bætt lagt fyrstu 3 stök fylkisins saman og síðan, innan lykkju, er lagt við næstu 8 stök fylkisins og kallað á lykkjuna aftur með hliðrun um `64` bæti
