@@ -1,8 +1,8 @@
-<!-- ---
+---
 pdf_options:
   format: a4
   margin: 10mm 20mm
---- -->
+---
 # heimadæmi 8 - tölvutækni og forritun
 þorvaldur tumi baldursson
 ---
@@ -69,10 +69,12 @@ afrit:
 ```
 
 ### a)
-ég veit ekki alveg hvort assembly útleiðingin mín er rétt en ég er nokkuð viss um að `M=7` og `N=11`  
-þessar tölur, eins og ég nefni fyrir ofan, eru offset fyrir lengd innri fylkja fylkjanna í vísunum fyrir stök sjá mynd,
+útfrá pælingunum mínum fyrir ofan sé ég að `M=7` og `N=11`  
+þessar tölur, eins og ég nefni fyrir ofan, eru hliðrun um lengd innri fylkja tvívíðu fylkjanna í vísunum fyrir stök sjá mynd,
 þar erum við með tvívítt fylki með lengdir `2,3` nú sjáum við að ef við notum formúluna `*arr + 8*(3*i+j)` til að finna stak `arr[i][j]` gengur það upp. 
-segjum að við viljum finna `arr[1][2]` setjum þá tölurnar inn í formúluna og fáum `*arr + 8*(3*1+2)` sem er jafnt og `*arr + 40` sem gefur stakið `6` sem er rétt  
+segjum að við viljum finna `arr[1][2]` setjum þá tölurnar inn í formúluna og fáum `*arr + 8*(3*1+2)` sem er jafnt og `*arr + 40` sem gefur stakið `6` sem er rétt
+
+
 ![mynd](imgs/2a.excalidraw.png)
 
 ### b)
@@ -85,7 +87,7 @@ skoðum fyrst assembly dumpið í heild sinni, ef við leitum að kanarífuglinu
 	movq	%rax, 8(%rsp)
   xorl	%eax, %eax
 ```
-eftir nokkrar keyrslur sýnist mér gildið á kanarínum vera það samax
+eftir nokkrar keyrslur er hægt að sjá að gildið er handahófskennt fyrir hverja keyrslu, þetta kemur í veg fyrir að hægt sé að læra regluna sem kanarífuglinn fylgir og setja inntak sem uppfyllir hana til að fara framhjá fuglinum
 
 ## 4. 
 ### a)
