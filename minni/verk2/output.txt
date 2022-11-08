@@ -1,0 +1,7 @@
+file|hits|misses|evictions|miss ratio
+ls|True|True|True|True
+mmulijk|True|True|True|True
+transpose|True|True|True|True
+yi2|True|True|True|True
+yi|True|True|True|True
+
