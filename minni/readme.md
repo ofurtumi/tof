@@ -77,14 +77,11 @@ void accessData(mem_addr_t addr)
 
     for (int i = 0; i < E; ++i)
     {
-        if (setInUse[i].valid)
+        if (setInUse[i].valid && setInUse[i].tag == tag)
         {
-            if (setInUse[i].tag == tag)
-            {
-                setInUse[i].lru = lru_counter++;
-                hit_count++;
-                return;
-            }
+            setInUse[i].lru = lru_counter++;
+            hit_count++;
+            return;
         }
 
         // gott að nota bara sömu lykkju til að gera tvo alveg mismunandi hluti
