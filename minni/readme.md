@@ -20,6 +20,8 @@ typedef Set *Cache; /**skilgreining á skyndiminninu, fylki af mengjum*/
 Cache cache;        /**global breyta cache*/
 ```
 
+<div style='page-break-after: always;'></div>
+
 **initCache**
 ```c
 void initCache()
@@ -42,6 +44,8 @@ void initCache()
 }
 ```
 
+<div style='page-break-after: always;'></div>
+
 **freeCache**
 ```c
 void freeCache()
@@ -56,6 +60,8 @@ void freeCache()
     free(cache);
 }
 ```
+
+<div style='page-break-after: always;'></div>
 
 **accessData**
 ```c
@@ -105,6 +111,8 @@ void accessData(mem_addr_t addr)
 }
 ```
 
+<div style='page-break-after: always;'></div>
+
 ### 1. keyrslur
 
 > til að herma 4-vítt skyndiminni með 64 bæta línu og 16 mengjum þurfum við fyrst að finna `s` þar sem $16 = 2^s$ og `b` þar sem $64 = 2^b$  
@@ -119,4 +127,3 @@ void accessData(mem_addr_t addr)
 **yi2.trace**  
 ![](2022-11-08-14-00-56.png)
 
-## 2.
